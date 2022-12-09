@@ -28,8 +28,8 @@ h1{
 .canvas-container{
     background-color: rgba(255, 255, 255, 0.808);
     margin: 20px auto;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
     min-width: 250px;
     max-width: 500px;
     width: 100%;
@@ -39,8 +39,8 @@ h1{
     user-select: none;
 }
 .box{
-    border-left: 1px black solid;
-    border-top: 1px black solid;
+    border-left: 1px gray solid;
+    border-top: 1px gray solid;
 }
 .toolbar{
     display: flex;
@@ -65,7 +65,8 @@ h1{
     margin: auto;
     font-size: 20px;
 }
-.box{
-    border-left: 1px black solid;
-    border-top: 1px black solid;
+
+.no-grid{
+    border-left: unset;
+    border-top: unset;
 }
