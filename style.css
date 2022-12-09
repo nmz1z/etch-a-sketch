@@ -1,0 +1,71 @@
+
+body{
+    margin: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.bg-video{
+    position: absolute;
+    z-index: -1;
+    min-height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    object-position: center;
+    object-fit: cover;
+}
+h1{
+    font-size: 40px;
+    margin-bottom: 0;
+}
+#version{
+    margin-top: 0;
+    margin-bottom: 10%;
+}
+.canvas-container{
+    background-color: rgba(255, 255, 255, 0.808);
+    margin: 2% auto;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    min-width: 300px;
+    max-width: 500px;
+    width: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template: repeat(10, 1fr)/repeat(10, 1fr);
+    user-select: none;
+}
+.box{
+    border-left: 1px black solid;
+    border-top: 1px black solid;
+}
+.toolbar{
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    min-width: 300px;
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.744);
+    margin: 0 auto;
+}
+.tool-box{
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+}
+.tool-box p, .tool-box h4{
+    margin-top: 0;
+}
+.tool-box button{
+    margin: auto;
+    font-size: 20px;
+}
+.box{
+    border-left: 1px black solid;
+    border-top: 1px black solid;
+}
