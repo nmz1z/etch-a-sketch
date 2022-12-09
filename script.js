@@ -1,27 +1,3 @@
-// let canvasBoxes = [];
-// let gridContainer = document.getElementById("grid-container");
-// let gridSize = 10;
-// let colorInput = document.getElementById("favcolor");
-// let currentColor = "black";
-
-// gridContainer.style.gridTemplate = `repeat(${gridSize}, 1fr)/repeat(${gridSize}, 1fr)`
-
-// for(let i = 0; i < gridSize ** 2; i++){
-//     canvasBoxes[i] = document.createElement("div");
-//     canvasBoxes[i].classList.add('box');
-//     canvasBoxes[i].boxIndex = i;
-//     // canvasBoxes[i].textContent = canvasBoxes[i].boxIndex;
-// }
-
-// for(let i = 0; i < canvasBoxes.length; i++){
-//     gridContainer.append(canvasBoxes[i]);
-// }
-
-// canvasBoxes = document.querySelectorAll('.box');
-
-
-// colorInput.addEventListener('input', () => {currentColor = colorInput.value;})
-// console.log(canvasBoxes[1].boxIndex);
 
 let canvasBoxes = [];
 let canvasContainer = document.getElementById("canvas-container");
@@ -29,6 +5,7 @@ let canvasSlider = document.getElementById("canvas-slider");
 let canvasSliderText = document.getElementById("canvas-slider-text");
 let colorPicker = document.getElementById("color-picker");
 let clearButton = document.getElementById("clear-button");
+let gridButton = document.getElementById("grid-button");
 
 let gridSize = 30;
 let currentColor = "#000000";
@@ -74,9 +51,16 @@ function clearCanvas(){
          canvasBoxes[i].style.backgroundColor = "";
     }
 }
+function toggeGrid(){
+    for (let i = 0; i < canvasBoxes.length; i++) {
+         canvasBoxes[i].classList.toggle("no-grid");
+    }
+}
+
 
 changeGridSize(30);
 drawNewGrid();
+gridButton.addEventListener('click', toggeGrid)
 clearButton.addEventListener('click', clearCanvas)
 colorPicker.addEventListener('input', () => {currentColor = colorPicker.value;});
 canvasSlider.addEventListener('input', () => {
