@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Etch-A-Sketch</title>
+</head>
+<body>
+    <h1>ETCH-A-SKETCH</h1>
+    <p id="version">v0.1</p>
+    <video src="vid/bg.mp4" class="bg-video" autoplay muted loop></video>
+    <div class="canvas-container" id="canvas-container"></div>
+    <div class="toolbar" id="toolbar">
+        <div class="tool-box">
+            <h4>Color</h4>
+            <input type="color" class="color-picker" id="color-picker" value="#000">
+        </div>
+        <div class="tool-box">
+            <h4>Canvas Size</h4>
+            <input type="range" class="canvas-slider" id="canvas-slider" max="50" min="10" value="30">
+            <p id="canvas-slider-text">30 x 30</p>
+        </div>
+        <div class="tool-box">
+            <button id="clear-button">Clear</button>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
