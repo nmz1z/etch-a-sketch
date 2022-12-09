@@ -69,4 +69,3 @@ canvasSlider.addEventListener('input', () => {
     resetCanvasContainer();
     drawNewGrid();
     });
-// init
