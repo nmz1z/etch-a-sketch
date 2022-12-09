@@ -1,4 +1,7 @@
-
+:root{
+    --regular: 'DotGothic16', sans-serif;
+    --highlight: 'Silkscreen', cursive;
+}
 body{
     margin: 0;
     color: white;
@@ -8,7 +11,7 @@ body{
     min-height: 850px;
     overflow-x: hidden;
     background-color: aqua;
-
+        font-family: var(--highlight);
 }
 
 .bg-video{
@@ -76,4 +79,7 @@ h1{
 .no-grid{
     border-left: unset;
     border-top: unset;
+}
+.button{
+    font-family: var(--highlight);
 }
