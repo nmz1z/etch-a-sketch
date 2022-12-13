@@ -14,16 +14,19 @@
     <h1>ETCH-A-SKETCH</h1>
     <p id="version">v0.1</p>
     <video disablePictureInPicture src="vid/bg.mp4" class="bg-video" id="bg-video" autoplay muted loop></video>
-    <div class="canvas-container" id="canvas-container"></div>
+    <div class="canvas-container" id="canvas-container" oncontextmenu="return false;"></div>
     <div class="toolbar" id="toolbar">
         <div class="tool-box">
             <h4>Color</h4>
-            <input type="color" class="color-picker" id="color-picker" value="#000">
+            <input type="color" class="color-picker" id="color-picker" value="#000000">
+            <h4>BG Color</h4>
+            <input type="color" class="color-picker" id="color-background" value="#FFFFFF" rgb>
         </div>
         <div class="tool-box">
             <h4>Canvas Size</h4>
-            <input type="range" class="canvas-slider" id="canvas-slider" max="50" min="10" value="30">
-            <p id="canvas-slider-text">30 x 30</p>
+            <input type="range" class="canvas-slider" id="canvas-slider" max="60" min="10" value="10">
+            <p id="canvas-slider-text">10 x 10</p>
+            <button class="middle-button" id="fill-button">fill</button>
         </div>
         <div class="tool-box">
             <button class="button" id="clear-button">Clear</button>
