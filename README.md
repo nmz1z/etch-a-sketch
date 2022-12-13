@@ -1,5 +1,7 @@
 # etch-a-sketch
 Create your own pixel art!
+## LIVE PREVIEW
+https://nmz1z.github.io/etch-a-sketch/
 
 ## Update (December 12nd, 2022)
 - Added functions:
