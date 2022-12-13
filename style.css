@@ -2,6 +2,9 @@
     --regular: 'DotGothic16', sans-serif;
     --highlight: 'Silkscreen', cursive;
 }
+*{
+    font-family: var(--highlight);
+}
 body{
     margin: 0;
     color: white;
@@ -10,8 +13,7 @@ body{
     text-align: center;
     min-height: 850px;
     overflow-x: hidden;
-    background-color: aqua;
-        font-family: var(--highlight);
+    font-family: var(--highlight);
 }
 
 .bg-video{
@@ -25,7 +27,9 @@ body{
     bottom: 0;
     overflow-x: hidden;
     object-fit: cover;
+    filter: brightness(0.7);
 }
+
 h1{
     font-size: 40px;
     margin-bottom: 0;
@@ -51,6 +55,8 @@ h1{
 .box{
     border-left: 1px gray solid;
     border-top: 1px gray solid;
+    font-size: 10px;
+    color: black;
 }
 .toolbar{
     display: flex;
@@ -73,13 +79,21 @@ h1{
 }
 .tool-box button{
     margin: auto;
-    font-size: 20px;
+    font-size: 15px;
 }
-
+.tool-box-row{
+    display: flex;
+}
 .no-grid{
     border-left: unset;
     border-top: unset;
 }
 .button{
     font-family: var(--highlight);
+}
+#fill-button{
+    font-size: 15px;
+}
+.button-selected{
+    background-color: yellow;
 }
