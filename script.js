@@ -3,17 +3,21 @@ let canvasMap;
 let canvasContainer = document.getElementById("canvas-container");
 let canvasSlider = document.getElementById("canvas-slider");
 let canvasSliderText = document.getElementById("canvas-slider-text");
-let colorInput = document.getElementById("color-picker");
+let primaryButton = document.getElementById("color-picker");
+let secondaryButton = document.getElementById("color-picker-sec");
+let eraserButton = document.getElementById("eraser-button");
 let clearButton = document.getElementById("clear-button");
 let gridButton = document.getElementById("grid-button");
 
 let gridSize = 30;
-let currentColor;
+let primaryColor;
+let secondaryColor;
 
 let bgColor = ""
 let bgInput = document.getElementById("color-background");
 
 let fillSelected = false;
+let eraserSelected = false;
 
 //// FUNCTIONS
 
@@ -54,41 +58,63 @@ function setUpProperties(object){
 // adds events on every cell of the grid
 function setUpEvents(object){
         object.addEventListener('mousemove', function(e) {
+            if(fillSelected) return;
+            if(eraserSelected && (e.buttons == 1 || e.buttons == 2)){
+                object.style.backgroundColor = bgColor;
+                object.color = bgColor;
+                object.filled = false;
+                return;
+            }
             if(e.buttons == 1){
-                object.color = currentColor;
-                object.style.backgroundColor = currentColor;
+                object.color = primaryColor;
+                object.style.backgroundColor = primaryColor;
                 object.filled = true;
             }else if(e.buttons == 2){
-                object.color = bgColor;
-                object.style.backgroundColor = bgColor;
-                object.filled = false;
+                object.color = secondaryColor;
+                object.style.backgroundColor = secondaryColor;
+                object.filled = true;
             }
         }
         );
-//////////////////////////////////////////////////
+        //
         object.addEventListener('click', function(e){
+            if(eraserSelected){
+                object.style.backgroundColor = bgColor;
+                object.color = bgColor;
+                object.filled = false;
+                return;
+            }
             if(fillSelected){
                 let [i, j] = getIndex(canvasMap, e.target);
                 let starterColor = e.target.color;
-                fillCanvas(canvasMap, i, j, starterColor);
+                fillCanvas(canvasMap, i, j, starterColor, primaryColor, true);
             }else{
-                object.style.backgroundColor = currentColor;
-                object.color = currentColor;
+                object.style.backgroundColor = primaryColor;
+                object.color = primaryColor;
                 object.filled = true;
             }
         }
         );
 
-        object.addEventListener('contextmenu', function(){
-            object.style.backgroundColor = bgColor;
-            object.color = bgColor;
-            object.filled = false;
+        object.addEventListener('contextmenu', function(e){
+            if(eraserSelected){
+                object.style.backgroundColor = bgColor;
+                object.color = bgColor;
+                object.filled = false;
+                return;
+            }
+            if(fillSelected){
+                let [i, j] = getIndex(canvasMap, e.target);
+                let starterColor = e.target.color;
+                fillCanvas(canvasMap, i, j, starterColor, secondaryColor, true);
+            }else{
+                object.style.backgroundColor = secondaryColor;
+                object.color = secondaryColor;
+                object.filled = true;
+            }
         }
         );
 }
-
-//////////////////////////////////////////////////
-
 
 function resetCanvasContainer(){
     canvasContainer.innerHTML = "";
@@ -127,6 +153,8 @@ function toggleGrid(){
 
 // handles toggle button/switch
 function toggleFill(){
+    eraserSelected = false;
+    eraserButton.classList.remove("button-selected")
     if(fillSelected){
         fillSelected = false;
     }else{
@@ -134,6 +162,17 @@ function toggleFill(){
     }
     fillButton.classList.toggle("button-selected");
 }
+function toggleEraser(){
+    fillSelected = false;
+    fillButton.classList.remove("button-selected")
+    if(eraserSelected){
+        eraserSelected = false;
+    }else{
+        eraserSelected = true;
+    }
+    eraserButton.classList.toggle("button-selected");
+}
+
 
 let fillButton = document.getElementById("fill-button");
 
@@ -148,37 +187,41 @@ function getIndex(matrix, object) {
   }
 
 // fill recursive function
-function fillCanvas(matrix, i, j, selectionColor){
+function fillCanvas(matrix, i, j, selectionColor, fillColor, fill){
     if(!(i >= 0 && i < matrix.length && j >= 0 && j < matrix.length)){
         return;
     }
-    if(matrix[i][j].color == currentColor)
+    if(matrix[i][j].color == fillColor)
     {
         return;
     }
     if(matrix[i][j].color != selectionColor){
         return;
     }
-    matrix[i][j].style.backgroundColor = `${currentColor}`;
-    matrix[i][j].color = currentColor;
-    matrix[i][j].filled = true;
-    fillCanvas(matrix, i + 1, j, selectionColor);
-    fillCanvas(matrix, i - 1, j, selectionColor);
-    fillCanvas(matrix, i, j + 1, selectionColor);
-    fillCanvas(matrix, i, j -1, selectionColor);
+    matrix[i][j].style.backgroundColor = `${fillColor}`;
+    matrix[i][j].color = fillColor;
+    matrix[i][j].filled = fill;
+    fillCanvas(matrix, i + 1, j, selectionColor, fillColor, fill);
+    fillCanvas(matrix, i - 1, j, selectionColor, fillColor, fill);
+    fillCanvas(matrix, i, j + 1, selectionColor, fillColor, fill);
+    fillCanvas(matrix, i, j -1, selectionColor, fillColor, fill);
 }
 
-// INIT
+// init
 generateMatrix(10, 10);
 gridButton.addEventListener('click', toggleGrid)
 clearButton.addEventListener('click', clearCanvas)
-colorInput.addEventListener('input', () => {currentColor = colorInput.value;});
+primaryButton.addEventListener('input', () => {primaryColor = primaryButton.value;});
+secondaryButton.addEventListener('input', () => {secondaryColor = secondaryButton.value;});
 bgInput.addEventListener('input', changeBackground);
 canvasSlider.addEventListener('input', () => {
     canvasSliderText.textContent = `${canvasSlider.value} x ${canvasSlider.value}`;
+    gridButton.classList.add("button-selected");
     changeGridSize(canvasSlider.value);
     resetCanvasContainer();
     generateMatrix(gridSize, gridSize);
     });
 fillButton.addEventListener("click", toggleFill);
-currentColor = colorInput.value;
+eraserButton.addEventListener('click', toggleEraser);
+primaryColor = primaryButton.value;
+secondaryColor = secondaryButton.value;
