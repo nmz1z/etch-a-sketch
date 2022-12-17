@@ -3,6 +3,7 @@
     --highlight: 'Silkscreen', cursive;
 }
 *{
+    /* border: red 1px solid; */
     font-family: var(--highlight);
 }
 body{
@@ -11,7 +12,7 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
-    min-height: 850px;
+    min-height: 950px;
     overflow-x: hidden;
     font-family: var(--highlight);
 }
@@ -20,7 +21,7 @@ body{
     position: absolute;
     margin: 0;
     z-index: -1;
-    min-height: 850px;
+    min-height: 950px;
     height: 100%;
     width: 100%;
     top: 0;
@@ -47,7 +48,6 @@ h1{
     max-width: 500px;
     width: 90%;
     aspect-ratio: 1;
-    /* flex-grow: 1; */
     display: grid;
     grid-template: repeat(10, 1fr)/repeat(10, 1fr);
     user-select: none;
@@ -61,7 +61,7 @@ h1{
 .toolbar{
     display: flex;
     justify-content: center;
-    gap: 10%;
+
     min-width: 300px;
     max-width: 500px;
     width: 100%;
@@ -69,13 +69,45 @@ h1{
     margin: 0 auto 30px;
 }
 .tool-box{
+    flex: 1;
     display: flex;
     color: black;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10px;
 }
-.tool-box p, .tool-box h4{
-    margin-top: 0;
+.left{
+    flex-direction: row;
+}
+.right{
+    flex-direction: column;
+}
+
+.color-box{
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.color-tools{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px
+}
+.color-box h4{
+    width: 100%;
+    margin-bottom: 5px;
+}
+.color-tools-button{
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+/*  */
+.tool-box h4{
+    margin-bottom: 0;
 }
 .tool-box button{
     margin: auto;
@@ -96,5 +128,4 @@ h1{
 }
 .button-selected{
     background-color: yellow;
-    /*  */
 }
