@@ -8,6 +8,8 @@ let secondaryButton = document.getElementById("color-picker-sec");
 let eraserButton = document.getElementById("eraser-button");
 let clearButton = document.getElementById("clear-button");
 let gridButton = document.getElementById("grid-button");
+var element = document.getElementById("canvas-container");
+let saveButton = document.getElementById("save-button");
 
 let gridSize = 30;
 let primaryColor;
@@ -16,6 +18,7 @@ let secondaryColor;
 let bgColor = ""
 let bgInput = document.getElementById("color-background");
 
+var getCanvas;
 let fillSelected = false;
 let eraserSelected = false;
 
@@ -223,5 +226,18 @@ canvasSlider.addEventListener('input', () => {
     });
 fillButton.addEventListener("click", toggleFill);
 eraserButton.addEventListener('click', toggleEraser);
+saveButton.addEventListener('click', function() {
+    html2canvas(element, {
+        onrendered: function(canvas) {
+            getCanvas = canvas;
+            var imgageData = getCanvas.toDataURL("image/png");
+            var a = document.createElement("a");
+            a.href = imgageData;
+            a.download = "Image.png";
+            a.click();
+        }
+    });
+});
+//
 primaryColor = primaryButton.value;
 secondaryColor = secondaryButton.value;
