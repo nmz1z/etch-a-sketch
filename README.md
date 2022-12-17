@@ -3,6 +3,12 @@ Create your own pixel art!
 ## LIVE PREVIEW
 https://nmz1z.github.io/etch-a-sketch/
 
+## Update (December 17th, 2022)
+- Added functions:
+    - Secondary Color: right click uses secondary color. Interacts with fill function.
+    - Download: still not 100%, somehow the grid lines are visible even if the grid option is turned off.
+- UI updated
+
 ## Update (December 12nd, 2022)
 - Added functions:
     - Fill: this was a little bit tricky. I used a recursive DFS Algorithm, although a iterative implementation should be a better choice, specially for bigger grids.
