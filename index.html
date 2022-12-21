@@ -9,11 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Silkscreen&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="https://kit.fontawesome.com/1d631eaa19.js" crossorigin="anonymous"></script>
     <title>Etch-A-Sketch</title>
 </head>
 <body>
     <h1>ETCH-A-SKETCH</h1>
     <p id="version">v0.3</p>
+
     <video disablePictureInPicture src="vid/bg.mp4" class="bg-video" id="bg-video" autoplay muted loop></video>
     <div class="canvas-container" id="canvas-container" oncontextmenu="return false;"></div>
     <div class="toolbar" id="toolbar">
@@ -40,6 +42,10 @@
                 <button download="download.png" class="button" id="save-button">Save</button>
             </div>
         </div>
+    </div>
+    <div class="socials">
+        <a href="https://github.com/nmz1z/"><i class="fa-brands fa-github"></i></a>
+        <a href="https://twitter.com/nmz1z_"><i class="fa-brands fa-twitter"></i></a>
     </div>
 </body>
 <script src="script.js"></script>

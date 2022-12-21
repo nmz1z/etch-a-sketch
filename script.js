@@ -49,6 +49,7 @@ function generateMatrix(rows, cols)
 }
 
 function setUpStyle(object){
+    // object.classList.add('no-grid')
     object.classList.add('box');
     canvasContainer.append(object);
 }
@@ -228,6 +229,7 @@ fillButton.addEventListener("click", toggleFill);
 eraserButton.addEventListener('click', toggleEraser);
 saveButton.addEventListener('click', function() {
     html2canvas(element, {
+        scale: 10,
         onrendered: function(canvas) {
             getCanvas = canvas;
             var imgageData = getCanvas.toDataURL("image/png");
@@ -241,3 +243,4 @@ saveButton.addEventListener('click', function() {
 //
 primaryColor = primaryButton.value;
 secondaryColor = secondaryButton.value;
+gridButton.classList.toggle("button-selected")
