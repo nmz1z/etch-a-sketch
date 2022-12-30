@@ -41,7 +41,7 @@ h1{
     margin-bottom: 20px;
 }
 .socials{
-    font-size: 25px;
+    font-size: x-large;
     color: white;
 }
 .socials a:visited, .socials a{
@@ -133,4 +133,9 @@ h1{
 }
 .button-selected{
     background-color: yellow;
+}
+
+.homepage-link{
+    color: white;
+    font-size: larger;
 }
