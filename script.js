@@ -10,6 +10,7 @@ let clearButton = document.getElementById("clear-button");
 let gridButton = document.getElementById("grid-button");
 var element = document.getElementById("canvas-container");
 let saveButton = document.getElementById("save-button");
+let fillButton = document.getElementById("fill-button");
 
 let gridSize = 30;
 let primaryColor;
@@ -21,6 +22,10 @@ let bgInput = document.getElementById("color-background");
 var getCanvas;
 let fillSelected = false;
 let eraserSelected = false;
+
+let rainbowColor;
+let rainbowSelected;
+let rainbowButton =  document.getElementById("rainbow-button");
 
 //// FUNCTIONS
 
@@ -69,6 +74,13 @@ function setUpEvents(object){
                 object.filled = false;
                 return;
             }
+            if(rainbowSelected && (e.buttons == 1 || e.buttons == 2)){
+                changeRainbowColor();
+                object.style.backgroundColor = rainbowColor;
+                object.color = rainbowColor;
+                object.filled = true;
+                return;
+            }
             if(e.buttons == 1){
                 object.color = primaryColor;
                 object.style.backgroundColor = primaryColor;
@@ -92,6 +104,13 @@ function setUpEvents(object){
                 let [i, j] = getIndex(canvasMap, e.target);
                 let starterColor = e.target.color;
                 fillCanvas(canvasMap, i, j, starterColor, primaryColor, true);
+                return;
+            }
+            if(rainbowSelected){
+                changeRainbowColor();
+                object.style.backgroundColor = rainbowColor;
+                object.color = rainbowColor;
+                object.filled = true;
             }else{
                 object.style.backgroundColor = primaryColor;
                 object.color = primaryColor;
@@ -111,6 +130,12 @@ function setUpEvents(object){
                 let [i, j] = getIndex(canvasMap, e.target);
                 let starterColor = e.target.color;
                 fillCanvas(canvasMap, i, j, starterColor, secondaryColor, true);
+                return;
+            }if(rainbowSelected){
+                changeRainbowColor();
+                object.style.backgroundColor = rainbowColor;
+                object.color = rainbowColor;
+                object.filled = true;
             }else{
                 object.style.backgroundColor = secondaryColor;
                 object.color = secondaryColor;
@@ -167,8 +192,8 @@ function toggleFill(){
     fillButton.classList.toggle("button-selected");
 }
 function toggleEraser(){
-    fillSelected = false;
-    fillButton.classList.remove("button-selected")
+    if(fillSelected) toggleFill();
+    if(rainbowSelected) toggleRainbow();
     if(eraserSelected){
         eraserSelected = false;
     }else{
@@ -178,7 +203,41 @@ function toggleEraser(){
 }
 
 
-let fillButton = document.getElementById("fill-button");
+function toggleRainbow(){
+    if(eraserSelected) toggleEraser();
+    if(rainbowSelected){
+        rainbowSelected = false;
+    }else{
+        rainbowSelected = true;
+    }
+     rainbowButton.classList.toggle("button-selected");
+}
+
+function changeRainbowColor(){
+    // maxsum = 460, minval = 20
+    const maxsum = 240;
+    let colors = [220, 0, 0];
+    let colorsFinal = [];
+    colors[1] = getRandomArbitrary(20, maxsum);
+    colors[2] = getRandomArbitrary(20, maxsum - colors[1]);
+
+    let index = (Math.floor(Math.random() * 3));
+    colorsFinal[0] = colors[index];
+    colors.splice(index, 1);
+
+    index = (Math.floor(Math.random() * 2));
+    colorsFinal[1] = colors[index];
+    colors.splice(index, 1);
+
+    colorsFinal[2] = colors[0];
+
+    rainbowColor = `rgb(${colorsFinal[0]},${colorsFinal[1]},${colorsFinal[2]})`;
+}
+
+function getRandomArbitrary(min, max) {
+   return Math.random() * (max - min) + min;
+ }
+
 
 // gets index from selected pixel
 function getIndex(matrix, object) {
@@ -190,7 +249,7 @@ function getIndex(matrix, object) {
     }
   }
 
-// fill recursive function
+// fill; recursive function
 function fillCanvas(matrix, i, j, selectionColor, fillColor, fill){
     if(!(i >= 0 && i < matrix.length && j >= 0 && j < matrix.length)){
         return;
@@ -201,6 +260,10 @@ function fillCanvas(matrix, i, j, selectionColor, fillColor, fill){
     }
     if(matrix[i][j].color != selectionColor){
         return;
+    }
+    if(rainbowSelected){
+        changeRainbowColor();
+        fillColor = rainbowColor;
     }
     matrix[i][j].style.backgroundColor = `${fillColor}`;
     matrix[i][j].color = fillColor;
@@ -213,6 +276,11 @@ function fillCanvas(matrix, i, j, selectionColor, fillColor, fill){
 
 // init
 generateMatrix(10, 10);
+primaryColor = primaryButton.value;
+secondaryColor = secondaryButton.value;
+gridButton.classList.toggle("button-selected")
+
+// events
 gridButton.addEventListener('click', toggleGrid)
 clearButton.addEventListener('click', clearCanvas)
 primaryButton.addEventListener('input', () => {primaryColor = primaryButton.value;});
@@ -227,6 +295,7 @@ canvasSlider.addEventListener('input', () => {
     });
 fillButton.addEventListener("click", toggleFill);
 eraserButton.addEventListener('click', toggleEraser);
+rainbowButton.addEventListener('click', toggleRainbow);
 saveButton.addEventListener('click', function() {
     html2canvas(element, {
         scale: 10,
@@ -241,6 +310,3 @@ saveButton.addEventListener('click', function() {
     });
 });
 //
-primaryColor = primaryButton.value;
-secondaryColor = secondaryButton.value;
-gridButton.classList.toggle("button-selected")
