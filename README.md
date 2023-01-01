@@ -3,6 +3,9 @@ Create your own pixel art!
 ## LIVE PREVIEW
 https://nmz1z.github.io/etch-a-sketch/
 
+## Update (January 1st, 2022)
+- Added rainbow function
+
 ## Update (December 17th, 2022)
 - Added functions:
     - Secondary Color: right click uses secondary color. Interacts with fill function.
@@ -11,7 +14,7 @@ https://nmz1z.github.io/etch-a-sketch/
 
 ## Update (December 12nd, 2022)
 - Added functions:
-    - Fill: this was a little bit tricky. I used a recursive DFS Algorithm, although a iterative implementation should be a better choice, specially for bigger grids.
+    - Fill: this was a little bit tricky. I used a recursive DFS Algorithm, although a iterative implementation is a better choice, specially for bigger grids.
     - Eraser: right click will aplly the background color to the brush.
 
 ## Deployed (December 8th, 2022)
